@@ -1,7 +1,7 @@
 #ifndef STAMP_H
 #define STAMP_H
 
-
+#define MAX_STAMPS 100
 struct Stamp {
     int index;
     char name[50];
