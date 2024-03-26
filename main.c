@@ -6,13 +6,13 @@ int main(void) {
     int stampCount = 0;
 
     // Считываем данные о марках из файлов
-    if (!readStampsFromFile("additional_info.txt", stamps, &stampCount)) {
+    if (!readStampsFromFile("in1.txt", stamps, &stampCount)) {
         printf("Ошибка при чтении марок из файла in.txt.\n");
         return 1;
     }
 
     // Считываем дополнительные данные о марках из файла stamps_details.txt
-    if (!readStampsDetailsFromFile("stamps_details.txt", stamps, &stampCount)) {
+    if (!readStampsDetailsFromFile("in2.txt", stamps, &stampCount)) {
         printf("Ошибка при чтении дополнительных данных о марках из файла stamps_details.txt.\n");
         return 1;
     }
