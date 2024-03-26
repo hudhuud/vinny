@@ -6,7 +6,22 @@
 int compareIndices(const void *a, const void *b) {
     return ((struct Stamp *)a)->index - ((struct Stamp *)b)->index;
 }
+int readStampsDetailsFromFile(const char *fileName, struct Stamp stamps[], int *stampCount) {
+    FILE *file = fopen(fileName, "r");
+    if (!file) {
+        printf("Ошибка при открытии файла: %s\n", fileName);
+        return 0;
+    }
 
+    int count = 0;
+    while (fscanf(file, "%d %d %d %s", &stamps[count].index, &stamps[count].albumNumber, &stamps[count].price, stamps[count].name) != EOF) {
+        count++;
+    }
+
+    *stampCount = count;
+    fclose(file);
+    return 1;
+}
 int readStampsFromFile(const char *fileName, struct Stamp stamps[], int *stampCount) {
     FILE *file = fopen(fileName, "r");
     if (!file) {
@@ -15,8 +30,8 @@ int readStampsFromFile(const char *fileName, struct Stamp stamps[], int *stampCo
     }
 
     int count = 0;
-    while (fscanf(file, "%d %s %s %d %d %d", &stamps[count].index, stamps[count].name, stamps[count].country,
-                  &stamps[count].year, &stamps[count].albumNumber, &stamps[count].price) != EOF) {
+    while (fscanf(file, "%d %s %d", &stamps[count].index, stamps[count].name,
+                  &stamps[count].year) != EOF) {
         count++;
     }
 
@@ -222,4 +237,3 @@ void displayMenu(struct Stamp stamps[], int *stampCount) {
         }
     } while (choice != 7);
 }
-
